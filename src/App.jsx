@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { db } from './db';
 import Button from './components/Button';
 import Friend from './components/Friend';
-import { initialFriends } from './friends';
+// import { initialFriends } from './friends';
 
 export default function App() {
 	const [friends, setFriends] = useState([]);
