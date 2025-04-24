@@ -5,6 +5,8 @@ import FormAddFriend from './components/FormAddFriend';
 import FriendList from './components/FriendList';
 import FormSplitBill from './components/FormSplitBill';
 import Footer from './components/Footer';
+import Header from './components/Header';
+import HowItWorks from './components/HowItWorks';
 
 // import { initialFriends } from './friends';
 
