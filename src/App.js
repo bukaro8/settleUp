@@ -14,6 +14,7 @@ export default function App() {
 	const [friends, setFriends] = useState([]);
 	const [showAddFriend, setShowAddFriend] = useState(false);
 	const [selectedFriend, setSelectedFriend] = useState(null);
+	const [sortBy, setSortBy] = useState('name');
 	//?load friends when starts
 	useEffect(() => {
 		const loadFriends = async () => {
@@ -39,6 +40,19 @@ export default function App() {
 		setSelectedFriend(friend);
 		setShowAddFriend(false);
 	}
+	const sortFriends = (friends) => {
+		const sorted = [...friends];
+		switch (sortBy) {
+			case 'name':
+				return sorted.sort((a, b) => a.name.localeCompare(b.name));
+			case 'balance-asc':
+				return sorted.sort((a, b) => a.balance - b.balance);
+			case 'balance-desc':
+				return sorted.sort((a, b) => b.balance - a.balance);
+			default:
+				return sorted;
+		}
+	};
 
 	async function handleSplitBill(value) {
 		if (!selectedFriend) return;
@@ -73,10 +87,12 @@ export default function App() {
 			<div className='app'>
 				<div className='sidebar'>
 					<FriendList
-						friends={friends}
+						friends={sortFriends(friends)}
 						onSelection={handleOnSelection}
 						selectedFriend={selectedFriend}
 						onDelete={handleDeleteFriend}
+						sortBy={sortBy}
+						onSort={setSortBy}
 					/>
 					{showAddFriend && <FormAddFriend onAddFriend={handleAddFriend} />}
 					<Button

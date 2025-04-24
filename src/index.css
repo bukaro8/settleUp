@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Rubik+Doodle+Shadow&family=Comfortaa:wght@700&display=swap');
 :root {
   --color-lightest: #fff4e6;
   --color-light: #ffe8cc;
@@ -404,4 +405,34 @@ form h2 {
   label {
     font-size: 1.5rem;
   }
+}
+.header h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: 6vw;
+  color: var(--color-dark);
+  text-shadow: 3px 3px 0px rgba(255,210,143,0.5);
+  margin-bottom: 0.5rem;
+  transform: rotate(-2deg);
+  display: inline-block;
+}
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+}
+
+.sort-controls select {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: 1px solid var(--color-light);
+  background-color: white;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.sort-controls select:focus {
+  outline: none;
+  border-color: var(--color-medium);
 }
