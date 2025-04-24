@@ -1,5 +1,5 @@
 # SettleUp - Bill Splitting App
-![App Screenshot](%PUBLIC_URL%/documentation/app-screenshot.png)
+![App Screenshot](documentation/app-screenshot.png)
 ## 💻  Run Locally
 /Users/vic/project2/settle-up/public/documentation/app-screenshot.png
 ```bash
