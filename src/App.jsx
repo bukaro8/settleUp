@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-// import { useLocalStorage } from './useLocalStorage';
+import { useLocalStorage } from './useLocalStorage';
 
 import { initialFriends } from './friends';
 
@@ -12,7 +12,7 @@ function Button({ text, onClick }) {
 }
 
 export default function App() {
-	const [friends, setFriends] = useState(initialFriends);
+	const [friends, setFriends] = useLocalStorage(initialFriends);
 	const [showAddFriend, setShowAddFriend] = useState(false);
 	const [selectedFriend, setSelectedFriend] = useState(null);
 	const handleShowAddFriend = () => {
