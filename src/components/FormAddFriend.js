@@ -2,33 +2,28 @@ import { useState } from 'react';
 import Button from './Button';
 export default function FormAddFriend({ onSubmit, onAddFriend }) {
 	const [name, setName] = useState('');
-
 	const [message, setMessage] = useState('');
-
 	const [background, setBackground] = useState('random');
 
 	const handleOnSubmit = (e) => {
 		e.preventDefault();
 
 		if (!name) {
-			setMessage('Please fill in both the name and image fields.');
+			setMessage('Please fill in the name field.');
 			return;
 		}
 
-		const id = crypto.randomUUID();
 		const newFriend = {
 			name,
 			background,
 			balance: 0,
-			id,
+			//!Change id to be handle by Dexie
 		};
 
 		onAddFriend(newFriend);
 		setName('');
 		setBackground('random');
 		setMessage('');
-
-		if (onSubmit) onSubmit(newFriend);
 	};
 
 	return (
