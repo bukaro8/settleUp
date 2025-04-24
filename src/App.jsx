@@ -10,7 +10,7 @@ export default function App() {
 	const [friends, setFriends] = useState([]);
 	const [showAddFriend, setShowAddFriend] = useState(false);
 	const [selectedFriend, setSelectedFriend] = useState(null);
-
+	//?load friends when starts
 	useEffect(() => {
 		const loadFriends = async () => {
 			const friendsFromDb = await db.friends.toArray();
@@ -52,13 +52,11 @@ export default function App() {
 		);
 	}
 
-	// Add delete handler
 	const handleDeleteFriend = async (id) => {
-		//* Delete from IndexedDB first
 		await db.friends.delete(id);
-		//? Then update state
+
 		setFriends((prev) => prev.filter((friend) => friend.id !== id));
-		//! Deselect if the deleted friend was selected
+
 		if (selectedFriend && selectedFriend.id === id) {
 			setSelectedFriend(null);
 		}
