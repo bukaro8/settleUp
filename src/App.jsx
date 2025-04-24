@@ -25,8 +25,18 @@ export default function App() {
 
 	function handleOnSelection(friend) {
 		setSelectedFriend(friend);
+		setShowAddFriend(false);
 	}
 
+	function handleSplitBill(value) {
+		setFriends((friends) =>
+			friends.map((friend) =>
+				friend.id === selectedFriend.id
+					? { ...friend, balance: friend.balance + value }
+					: friend
+			)
+		);
+	}
 	return (
 		<div className='app'>
 			<div className='sidebar'>
@@ -42,7 +52,12 @@ export default function App() {
 				/>
 			</div>
 			{/* only renders, when you select a friend */}
-			{selectedFriend && <FormSplitBill selectedFriend={selectedFriend} />}
+			{selectedFriend && (
+				<FormSplitBill
+					selectedFriend={selectedFriend}
+					onSplitBill={handleSplitBill}
+				/>
+			)}
 		</div>
 	);
 }
@@ -100,7 +115,7 @@ function Avatar({ name, size = 100, background = 'random' }, color = 'fff') {
 }
 
 function Friend({ friend, onSelection, selectedFriend }) {
-	const isSelected = selectedFriend.id === friend.id;
+	const isSelected = selectedFriend?.id === friend.id;
 	return (
 		<li className={isSelected ? 'selected' : ''}>
 			<Avatar name={friend.name} background={friend.background} />
@@ -194,34 +209,49 @@ function FormAddFriend({ onSubmit, onAddFriend }) {
 	);
 }
 
-function FormSplitBill({ selectedFriend }) {
-	const [bill, setBill] = useState(null);
-	const [yourShare, setYourShare] = useState(null);
+function FormSplitBill({ selectedFriend, onSplitBill }) {
+	const [bill, setBill] = useState('');
+	const [yourShare, setYourShare] = useState('');
+	const [whoIsPaying, setWhoIsPaying] = useState('user');
+	const payByFriend = bill ? bill - yourShare : '';
+
+	const handleOnSubmit = (e) => {
+		e.preventDefault();
+		if (!bill || !yourShare) return;
+		onSplitBill(whoIsPaying === 'user' ? payByFriend : -yourShare);
+	};
 	return (
-		<form className='form-split-bill'>
+		<form className='form-split-bill' onSubmit={handleOnSubmit}>
 			<h2>Split a bill with {selectedFriend.name}</h2>
 			<label htmlFor=''> Bill</label>
 			<input
-				type='text'
+				type='number'
 				placeholder='💸 Amount'
 				value={bill}
-				onChange={(e) => setBill(e.target.value)}
+				onChange={(e) => setBill(Number(e.target.value))}
 			/>
 
 			<label htmlFor=''> Your Expense</label>
 			<input
-				type='text'
+				type='number'
 				value={yourShare}
-				onChange={(e) => setYourShare(e.target.value)}
+				onChange={(e) =>
+					setYourShare(
+						Number(e.target.value) > bill ? yourShare : Number(e.target.value)
+					)
+				}
 			/>
 
 			<label htmlFor=''> {selectedFriend.name} Expenses</label>
-			<input type='text' disabled value={bill - yourShare} />
+			<input type='text' disabled value={payByFriend} />
 
 			<label htmlFor=''> Who is paying the bill</label>
-			<select>
+			<select
+				value={whoIsPaying}
+				onChange={(e) => setWhoIsPaying(e.target.value)}
+			>
 				<option value='user'>You</option>
-				<option value={selectedFriend}>{selectedFriend.name}</option>
+				<option value={selectedFriend.name}>{selectedFriend.name}</option>
 			</select>
 			<Button text={'Split Bill'} />
 		</form>
