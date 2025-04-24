@@ -1,70 +1,120 @@
-# Getting Started with Create React App
+# SettleUp - Bill Splitting App
+![App Screenshot](%PUBLIC_URL%/documentation/app-screenshot.png)
+## 💻  Run Locally
+/Users/vic/project2/settle-up/public/documentation/app-screenshot.png
+```bash
+# Clone repository
+git clone https://github.com/yourusername/settleup.git
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Install dependencies
+npm install
 
-## Available Scripts
+# Start development server
+npm start
+```
 
-In the project directory, you can run:
+## 🛠 Tech Stack
 
-### `npm start`
+| Technology | Purpose           | Version |
+| ---------- | ----------------- | ------- |
+| React      | UI Framework      | 18.2+   |
+| Dexie.js   | IndexedDB Wrapper | 3.2+    |
+| CSS        | Component Styling | 3       |
+| HTML       | Structure, Meta   | 5       |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 👥 User Stories
 
-### `npm test`
+### 👋 First-Time User
+**As a new user, I want to:**
+- Immediately understand how to add friends and split bills
+- See example balances to grasp the app's functionality
+- Easily navigate between different sections
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Acceptance Criteria:**
+- Clear call-to-action buttons visible on first load
+- Demo data available via friends.js file
+- Intuitive menu structure with <= 3 main sections
 
-### `npm run build`
+### 🔄 Returning User
+**As a regular user, I need to:**
+- Quickly add new expenses after group activities
+- Modify existing entries without data loss
+- Filter friends by balance status (owes/owed)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Acceptance Criteria:**
+- Quick-add shortcut in navigation
+- Undo/redo functionality for edits
+- Balance filter chips above friend list
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## ✨ Features
 
-### `npm run eject`
+### Core Features
+| Feature            | Description                 | Implementation      |
+| ------------------ | --------------------------- | ------------------- |
+| Friend Management  | CRUD operations for friends | React State + Dexie |
+| Balance Calculator | Real-time debt tracking     | useEffect hooks     |
+| Bill Splitting     | Flexible cost division      | Algorithm Module    |
+| Data Persistence   | Offline-first storage       | DB Dexie            |
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🧩 Component Structure
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+[![Component Structure](./documentation/component-structure.png)](./documentation/component-structure.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **App**: Root component managing state
+- **Header**: Contains logo and main navigation
+- **FriendList**: Renders scrollable list of friends
+- **Friend**: Individual friend card component
+- **Forms**: Handle user input (AddFriend/SplitBill)
+- **Footer**: App version and social links
 
-## Learn More
+## 🔄 Data Flow
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+[![Data Flow](./documentation/data-flow.png)](./documentation/data-flow.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. User interacts with UI component
+2. Event handler updates React state
+3. State change triggers Dexie DB update
+4. IndexedDB persists data between sessions
+5. Components re-render with fresh data
 
-### Code Splitting
+## 🎨 Design System
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Color Palette
 
-### Analyzing the Bundle Size
+| Role      | Hex       | Usage Example         |
+| --------- | --------- | --------------------- |
+| Primary   | `#ff922b` | Main buttons, headers |
+| Secondary | `#ffe8cc` | Form backgrounds      |
+| Success   | `#66a80f` | Positive balances     |
+| Error     | `#e03131` | Negative balances     |
+| Text      | `#495057` | Body copy             |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Typography
 
-### Making a Progressive Web App
+| Element   | Font Family | Size   | Weight |
+| --------- | ----------- | ------ | ------ |
+| Headings  | `Rubik`     | 2.4rem | 600    |
+| Body Text | `System UI` | 1.6rem | 400    |
+| Buttons   | `Rubik`     | 1.4rem | 700    |
+| Numbers   | `Menlo`     | 1.6rem | 400    |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 📊 Testing
 
-### Advanced Configuration
+```javascript
+// Sample test for balance calculation
+test('calculates friend balance correctly', () => {
+  const bill = 100;
+  const yourExpense = 60;
+  const payer = 'user';
+  
+  const expected = {
+    yourBalance: +40,
+    friendBalance: -40
+  };
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  expect(calculateBalances(bill, yourExpense, payer)).toEqual(expected);
+});
+```
