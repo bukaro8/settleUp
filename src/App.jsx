@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocalStorage } from './useLocalStorage';
+// import { useLocalStorage } from './useLocalStorage';
 
 import { initialFriends } from './friends';
 
@@ -12,7 +12,7 @@ function Button({ text, onClick }) {
 }
 
 export default function App() {
-	const [friends, setFriends] = useLocalStorage(initialFriends);
+	const [friends, setFriends] = useState(initialFriends);
 	const [showAddFriend, setShowAddFriend] = useState(false);
 	const [selectedFriend, setSelectedFriend] = useState(null);
 	const handleShowAddFriend = () => {
@@ -37,6 +37,7 @@ export default function App() {
 			)
 		);
 	}
+
 	return (
 		<div className='app'>
 			<div className='sidebar'>
@@ -76,6 +77,7 @@ function FriendList({ friends, onSelection, selectedFriend }) {
 		</ul>
 	);
 }
+
 function Avatar({ name, size = 100, background = 'random' }, color = 'fff') {
 	const [avatarUrl, setAvatarUrl] = useState('');
 
@@ -114,8 +116,9 @@ function Avatar({ name, size = 100, background = 'random' }, color = 'fff') {
 	);
 }
 
-function Friend({ friend, onSelection, selectedFriend }) {
+function Friend({ friend, onSelection, selectedFriend, onDelete }) {
 	const isSelected = selectedFriend?.id === friend.id;
+
 	return (
 		<li className={isSelected ? 'selected' : ''}>
 			<Avatar name={friend.name} background={friend.background} />
@@ -125,17 +128,23 @@ function Friend({ friend, onSelection, selectedFriend }) {
 					You owe {friend.name} £{Math.abs(friend.balance)}
 				</p>
 			)}
-
 			{friend.balance > 0 && (
 				<p className='green'>
-					{friend.name} owe you £{Math.abs(friend.balance)}
+					{friend.name} owes you £{Math.abs(friend.balance)}
 				</p>
 			)}
-
-			{friend.balance === 0 && (
-				<p className=''>You and {friend.name} are even</p>
-			)}
-			<Button text={'Select'} onClick={() => onSelection(friend)} />
+			{friend.balance === 0 && <p>You and {friend.name} are even</p>}
+			<div className='friend-actions'>
+				<Button text='Select' onClick={() => onSelection(friend)} />
+				<Button
+					text='❌'
+					onClick={(e) => {
+						e.stopPropagation();
+						onDelete(friend.id);
+					}}
+					className='delete-btn'
+				/>
+			</div>
 		</li>
 	);
 }

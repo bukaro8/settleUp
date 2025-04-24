@@ -28,7 +28,27 @@ body {
   align-items: center;
   justify-content: center;
 }
+.friend-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
 
+.delete-btn {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.delete-btn:hover {
+  background: #ff5252;
+  transform: scale(1.1);
+}
 .app {
   min-height: 66vh;
   display: grid;
