@@ -10,6 +10,9 @@ export default function FormSplitBill({ selectedFriend, onSplitBill }) {
 		e.preventDefault();
 		if (!bill || !yourShare) return;
 		onSplitBill(whoIsPaying === 'user' ? payByFriend : -yourShare);
+		setBill('');
+		setYourShare('');
+		setWhoIsPaying('you');
 	};
 	return (
 		<form className='form-split-bill' onSubmit={handleOnSubmit}>

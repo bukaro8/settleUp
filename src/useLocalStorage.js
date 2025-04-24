@@ -1,4 +1,6 @@
-// useLocalStorage.js
+//!unused code. is an option to use instead than the Dexie DB and
+//! save the information in local storage
+//! it will be gone when you restart the computer
 import { useState, useEffect } from 'react';
 
 export function useLocalStorage(key, initialValue) {
