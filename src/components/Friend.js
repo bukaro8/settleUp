@@ -26,14 +26,23 @@ export default function Friend({
 			{friend.balance === 0 && <p>You and {friend.name} are even</p>}
 			<div className='friend-actions'>
 				<Button text='Select' onClick={() => onSelection(friend)} />
-				<Button
+				{/* <Button
 					text='❌'
 					onClick={(e) => {
 						e.stopPropagation();
 						onDelete(friend.id);
 					}}
 					className='delete-btn'
-				/>
+				/> */}
+				<button
+					className='delete-btn'
+					onClick={(e) => {
+						e.stopPropagation();
+						onDelete(friend.id);
+					}}
+				>
+					Delete
+				</button>
 			</div>
 		</li>
 	);

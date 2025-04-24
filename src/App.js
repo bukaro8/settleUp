@@ -69,6 +69,7 @@ export default function App() {
 	return (
 		<div className='app-container'>
 			<Header />
+			<HowItWorks />
 			<div className='app'>
 				<div className='sidebar'>
 					<FriendList
@@ -83,13 +84,11 @@ export default function App() {
 						onClick={handleShowAddFriend}
 					/>
 				</div>
-				{selectedFriend ? (
+				{selectedFriend && (
 					<FormSplitBill
 						selectedFriend={selectedFriend}
 						onSplitBill={handleSplitBill}
 					/>
-				) : (
-					<HowItWorks />
 				)}
 			</div>
 			<Footer />

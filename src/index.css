@@ -26,11 +26,73 @@ html {
 }
 
 body {
-  height: 100vh;
-  color: #495057;
+  min-height: 100vh;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  color: #495057;
+  margin: 0;
+}
+
+.app-container {
+  background-color: #f8f9fa ;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.header {
+  width: 100%;
+  background-color: var(--color-lightest);
+  border-bottom: 2px solid var(--color-light);
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.header h1 {
+  font-size: 3.2rem;
+  color: var(--color-dark);
+  margin-bottom: 0.5rem;
+}
+
+.tagline {
+  font-size: 1.6rem;
+  color: #666;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
   justify-content: center;
+  padding: 2rem;
+}
+
+.app {
+  width: 100%;
+  justify-content:center;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 34rem 44rem;
+  column-gap: 4rem;
+  align-items: start;
+}
+
+.footer {
+  width: 100%;
+  background-color: var(--color-lightest);
+  border-top: 2px solid var(--color-light);
+  padding: 2rem;
+  text-align: center;
+  margin-top: auto;
+}
+
+.footer p {
+  margin: 0.5rem 0;
+  color: #666;
+}
+
+.credit {
+  font-size: 0.9rem;
 }
 
 .friend-actions {
@@ -43,9 +105,8 @@ body {
   background: #ff6b6b;
   color: white;
   border: none;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+  padding: 0.8rem 1.2rem;
+  border-radius: 5px;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -53,14 +114,6 @@ body {
 .delete-btn:hover {
   background: #ff5252;
   transform: scale(1.1);
-}
-
-.app {
-  min-height: 66vh;
-  display: grid;
-  grid-template-columns: 34rem 44rem;
-  column-gap: 4rem;
-  align-items: start;
 }
 
 .button {
@@ -170,6 +223,8 @@ select {
   border: 1px solid var(--color-light);
   border-radius: 4px;
   transition: 0.3s;
+  width: 100%;
+  max-width: 100%;
 }
 
 input:focus,
@@ -202,172 +257,16 @@ form h2 {
 }
 
 .avatar {
-  width: 2em;
-  height: 2em;
+  width: 3.6rem;
+  height: 3.6rem;
   border-radius: 50%;
   cursor: pointer;
 }
 
-@media (max-width: 768px) {
-  html {
-    font-size: 56.25%;
-  }
-
-  body {
-    height: auto;
-    min-height: 100vh;
-    padding: var(--vertical-padding) var(--horizontal-padding);
-    align-items: flex-start;
-  }
-
-  .app {
-    width: 100%;
-    min-height: auto;
-    grid-template-columns: 1fr;
-    row-gap: 3rem;
-  }
-
-  .sidebar {
-    width: 100%;
-  }
-
-  .sidebar ul {
-    margin-bottom: 1.5rem;
-  }
-
-  .form-add-friend,
-  .form-split-bill {
-    grid-template-columns: 1fr;
-    padding: 2rem;
-  }
-
-  form .button,
-  form h2 {
-    grid-column: 1;
-  }
-
-  .form-split-bill {
-    padding: 2rem;
-  }
-
-  .friend-actions {
-    justify-content: flex-start;
-  }
-
-  .sidebar li {
-    grid-template-columns: 3.6rem 1fr auto;
-    padding: 1rem;
-    column-gap: 1rem;
-  }
-
-  @media (max-width: 400px) {
-    .friend-actions {
-      flex-direction: column;
-      gap: 4px;
-    }
-    
-    .button {
-      width: 100%;
-    }
-    
-    .delete-btn {
-      width: 100%;
-      border-radius: 4px;
-      height: auto;
-      padding: 0.4rem;
-    }
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .app {
-    grid-template-columns: 28rem 36rem;
-    column-gap: 2rem;
-  }
-
-  .form-split-bill {
-    padding: 2rem 2.5rem;
-  }
-}
-
-@media (min-width: 1600px) {
-  html {
-    font-size: 75%;
-  }
-
-  .app {
-    grid-template-columns: 38rem 50rem;
-    column-gap: 6rem;
-  }
-}
-
-input,
-select {
-  width: 100%;
-  max-width: 100%;
-}
-
-.avatar {
-  width: 3.6rem;
-  height: 3.6rem;
-}
-
-@media (max-width: 768px) {
-  .avatar {
-    width: 3rem;
-    height: 3rem;
-  }
-}
-
-.button {
-  padding: 0.7rem 1rem;
-  font-size: 1.4rem;
-}
-
-@media (min-width: 1025px) {
-  .button {
-    padding: 0.8rem 1.2rem;
-    font-size: 1.5rem;
-  }
-}
-
-label {
-  font-size: 1.4rem;
-}
-
-@media (min-width: 768px) {
-  label {
-    font-size: 1.5rem;
-  }
-}
-
-form {
-  max-width: 100%;
-}
-.header {
-  text-align: center;
-  padding: 2rem 0;
-  background-color: var(--color-lightest);
-  border-bottom: 2px solid var(--color-light);
-}
-
-.header h1 {
-  font-size: 3.2rem;
-  color: var(--color-dark);
-  margin-bottom: 0.5rem;
-}
-
-.tagline {
-  font-size: 1.6rem;
-  color: #666;
-}
-
-/* How It Works Styles */
 .how-it-works {
   background-color: #f8f9fa;
   padding: 2rem;
   border-radius: 8px;
-  margin: 2rem 0;
   text-align: center;
 }
 
@@ -378,6 +277,7 @@ form {
 
 .steps {
   display: flex;
+  font-size: 1.4rem;
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 2rem;
@@ -404,38 +304,104 @@ form {
   margin-bottom: 1rem;
 }
 
+@media (max-width: 1024px) {
+  .app {
+    grid-template-columns: 28rem 36rem;
+    column-gap: 2rem;
+  }
 
-.footer {
-  text-align: center;
-  padding: 2rem;
-  margin-top: 3rem;
-  background-color: var(--color-lightest);
-  border-top: 2px solid var(--color-light);
+  .form-split-bill {
+    padding: 2rem 2.5rem;
+  }
 }
-
-.footer p {
-  margin: 0.5rem 0;
-  color: #666;
-}
-
-.credit {
-  font-size: 0.9rem;
-}
-
 
 @media (max-width: 768px) {
+  html {
+    font-size: 56.25%;
+  }
+
+  .app {
+    background-color: #f8f9fa;
+    grid-template-columns: 1fr;
+    row-gap: 3rem;
+    padding: 0 1.5rem;
+  }
+
+  .sidebar li {
+    grid-template-columns: 3.6rem 1fr auto;
+    padding: 1rem;
+    column-gap: 1rem;
+  }
+
+  .form-add-friend,
+  .form-split-bill {
+    grid-template-columns: 1fr;
+    padding: 2rem;
+  }
+
+  form .button,
+  form h2 {
+    grid-column: 1;
+  }
+
   .steps {
     flex-direction: column;
     gap: 1rem;
   }
-  
+
   .step {
     min-width: 100%;
   }
+
+  .avatar {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .button {
+    padding: 0.7rem 1rem;
+    font-size: 1.4rem;
+  }
 }
-@media (min-width: 1200px) {
+
+@media (max-width: 400px) {
+  .friend-actions {
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .button {
+    width: 100%;
+  }
+  
+  .delete-btn {
+    width: 100%;
+    border-radius: 4px;
+    height: auto;
+    padding: 0.4rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  html {
+    font-size: 75%;
+  }
+
   .app {
-    max-width: 1200px;
-    margin: 0 auto;
+    grid-template-columns: 38rem 50rem;
+    column-gap: 6rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .button {
+    padding: 0.8rem 1.2rem;
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  label {
+    font-size: 1.5rem;
   }
 }
