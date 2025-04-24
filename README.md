@@ -61,18 +61,19 @@ npm start
 
 ## 🧩 Component Structure
 
-[![Component Structure](./documentation/component-structure.png)](./documentation/component-structure.png)
+![Component Diagram](./documentation/component-structure.png)
+
 
 - **App**: Root component managing state
 - **Header**: Contains logo and main navigation
 - **FriendList**: Renders scrollable list of friends
 - **Friend**: Individual friend card component
 - **Forms**: Handle user input (AddFriend/SplitBill)
-- **Footer**: App version and social links
+- **Footer**:Date and creator name
 
 ## 🔄 Data Flow
 
-[![Data Flow](./documentation/data-flow.png)](./documentation/data-flow.png)
+![Data Flow Diagram](./documentation/data-flow.png)
 
 1. User interacts with UI component
 2. Event handler updates React state
