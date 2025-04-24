@@ -1,25 +1,31 @@
 import { useState, useEffect } from 'react';
-// import { useLocalStorage } from './useLocalStorage';
-
+import { db } from './db';
+import Button from './components/Button';
+import Friend from './components/Friend';
 import { initialFriends } from './friends';
 
-function Button({ text, onClick }) {
-	return (
-		<button className='button' onClick={onClick}>
-			{text}
-		</button>
-	);
-}
-
 export default function App() {
-	const [friends, setFriends] = useState(initialFriends);
+	const [friends, setFriends] = useState([]);
 	const [showAddFriend, setShowAddFriend] = useState(false);
 	const [selectedFriend, setSelectedFriend] = useState(null);
+
+	useEffect(() => {
+		const loadFriends = async () => {
+			const friendsFromDb = await db.friends.toArray();
+			setFriends(friendsFromDb);
+		};
+
+		loadFriends();
+	}, []);
+
 	const handleShowAddFriend = () => {
 		setShowAddFriend(!showAddFriend);
 	};
-	const handleAddFriend = (friend) => {
-		setFriends((friends) => [...friends, friend]);
+
+	const handleAddFriend = async (friend) => {
+		const id = await db.friends.add(friend);
+
+		setFriends((prev) => [...prev, { ...friend, id }]);
 		setShowAddFriend(false);
 	};
 
@@ -28,7 +34,13 @@ export default function App() {
 		setShowAddFriend(false);
 	}
 
-	function handleSplitBill(value) {
+	async function handleSplitBill(value) {
+		if (!selectedFriend) return;
+
+		await db.friends.update(selectedFriend.id, {
+			balance: selectedFriend.balance + value,
+		});
+
 		setFriends((friends) =>
 			friends.map((friend) =>
 				friend.id === selectedFriend.id
@@ -38,6 +50,18 @@ export default function App() {
 		);
 	}
 
+	// Add delete handler
+	const handleDeleteFriend = async (id) => {
+		//* Delete from IndexedDB first
+		await db.friends.delete(id);
+		//? Then update state
+		setFriends((prev) => prev.filter((friend) => friend.id !== id));
+		//! Deselect if the deleted friend was selected
+		if (selectedFriend && selectedFriend.id === id) {
+			setSelectedFriend(null);
+		}
+	};
+
 	return (
 		<div className='app'>
 			<div className='sidebar'>
@@ -45,6 +69,7 @@ export default function App() {
 					friends={friends}
 					onSelection={handleOnSelection}
 					selectedFriend={selectedFriend}
+					onDelete={handleDeleteFriend}
 				/>
 				{showAddFriend && <FormAddFriend onAddFriend={handleAddFriend} />}
 				<Button
@@ -52,7 +77,6 @@ export default function App() {
 					onClick={handleShowAddFriend}
 				/>
 			</div>
-			{/* only renders, when you select a friend */}
 			{selectedFriend && (
 				<FormSplitBill
 					selectedFriend={selectedFriend}
@@ -78,76 +102,38 @@ function FriendList({ friends, onSelection, selectedFriend }) {
 	);
 }
 
-function Avatar({ name, size = 100, background = 'random' }, color = 'fff') {
-	const [avatarUrl, setAvatarUrl] = useState('');
+// function Friend({ friend, onSelection, selectedFriend, onDelete }) {
+// 	const isSelected = selectedFriend?.id === friend.id;
 
-	useEffect(() => {
-		let objectUrl = '';
-
-		async function fetchAvatar() {
-			const url = `https://ui-avatars.com/api/?name=${encodeURIComponent(
-				name
-			)}&size=${size}&background=${background}&color=${color}`;
-
-			try {
-				const response = await fetch(url);
-				const blob = await response.blob();
-				objectUrl = URL.createObjectURL(blob);
-				setAvatarUrl(objectUrl);
-			} catch (error) {
-				console.error('Failed to load avatar', error);
-				setAvatarUrl('');
-			}
-		}
-
-		fetchAvatar();
-	}, [name, size, background, color]);
-
-	return (
-		<img
-			src={
-				avatarUrl ||
-				`https://ui-avatars.com/api/?name=${encodeURIComponent(
-					name
-				)}&size=${size}`
-			}
-			alt={name}
-		/>
-	);
-}
-
-function Friend({ friend, onSelection, selectedFriend, onDelete }) {
-	const isSelected = selectedFriend?.id === friend.id;
-
-	return (
-		<li className={isSelected ? 'selected' : ''}>
-			<Avatar name={friend.name} background={friend.background} />
-			<h3>{friend.name}</h3>
-			{friend.balance < 0 && (
-				<p className='red'>
-					You owe {friend.name} £{Math.abs(friend.balance)}
-				</p>
-			)}
-			{friend.balance > 0 && (
-				<p className='green'>
-					{friend.name} owes you £{Math.abs(friend.balance)}
-				</p>
-			)}
-			{friend.balance === 0 && <p>You and {friend.name} are even</p>}
-			<div className='friend-actions'>
-				<Button text='Select' onClick={() => onSelection(friend)} />
-				<Button
-					text='❌'
-					onClick={(e) => {
-						e.stopPropagation();
-						onDelete(friend.id);
-					}}
-					className='delete-btn'
-				/>
-			</div>
-		</li>
-	);
-}
+// 	return (
+// 		<li className={isSelected ? 'selected' : ''}>
+// 			<Avatar name={friend.name} background={friend.background} />
+// 			<h3>{friend.name}</h3>
+// 			{friend.balance < 0 && (
+// 				<p className='red'>
+// 					You owe {friend.name} £{Math.abs(friend.balance)}
+// 				</p>
+// 			)}
+// 			{friend.balance > 0 && (
+// 				<p className='green'>
+// 					{friend.name} owes you £{Math.abs(friend.balance)}
+// 				</p>
+// 			)}
+// 			{friend.balance === 0 && <p>You and {friend.name} are even</p>}
+// 			<div className='friend-actions'>
+// 				<Button text='Select' onClick={() => onSelection(friend)} />
+// 				<Button
+// 					text='❌'
+// 					onClick={(e) => {
+// 						e.stopPropagation();
+// 						onDelete(friend.id);
+// 					}}
+// 					className='delete-btn'
+// 				/>
+// 			</div>
+// 		</li>
+// 	);
+// }
 
 function FormAddFriend({ onSubmit, onAddFriend }) {
 	const [name, setName] = useState('');
