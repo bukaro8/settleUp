@@ -1,5 +1,5 @@
 import Friend from './Friend';
-export function FriendList({
+export default function FriendList({
 	friends,
 	onSelection,
 	selectedFriend,
