@@ -4,18 +4,23 @@ export default function FormSplitBill({ selectedFriend, onSplitBill }) {
 	const [bill, setBill] = useState('');
 	const [yourShare, setYourShare] = useState('');
 	const [whoIsPaying, setWhoIsPaying] = useState('user');
+
 	const payByFriend = bill ? bill - yourShare : '';
 
-	const handleOnSubmit = (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (!bill || !yourShare) return;
-		onSplitBill(whoIsPaying === 'user' ? payByFriend : -yourShare);
+
+		const amount = whoIsPaying === 'user' ? payByFriend : -Number(yourShare);
+		onSplitBill(amount);
+
 		setBill('');
 		setYourShare('');
-		setWhoIsPaying('you');
+		setWhoIsPaying('user');
 	};
+
 	return (
-		<form className='form-split-bill' onSubmit={handleOnSubmit}>
+		<form className='form-split-bill' onSubmit={handleSubmit}>
 			<h2>Split a bill with {selectedFriend.name}</h2>
 			<label htmlFor=''> Bill</label>
 			<input

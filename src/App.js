@@ -54,21 +54,27 @@ export default function App() {
 		}
 	};
 
-	async function handleSplitBill(value) {
+	const handleSplitBill = async (value) => {
 		if (!selectedFriend) return;
 
-		await db.friends.update(selectedFriend.id, {
-			balance: selectedFriend.balance + value,
-		});
+		try {
+			const newBalance = selectedFriend.balance + value;
 
-		setFriends((friends) =>
-			friends.map((friend) =>
-				friend.id === selectedFriend.id
-					? { ...friend, balance: friend.balance + value }
-					: friend
-			)
-		);
-	}
+			await db.friends.update(selectedFriend.id, { balance: newBalance });
+
+			setFriends((friends) =>
+				friends.map((friend) =>
+					friend.id === selectedFriend.id
+						? { ...friend, balance: newBalance }
+						: friend
+				)
+			);
+
+			setSelectedFriend((prev) => ({ ...prev, balance: newBalance }));
+		} catch (error) {
+			console.error('Error updating balance:', error);
+		}
+	};
 
 	const handleDeleteFriend = async (id) => {
 		await db.friends.delete(id);
