@@ -4,6 +4,8 @@ import Button from './components/Button';
 import FormAddFriend from './components/FormAddFriend';
 import FriendList from './components/FriendList';
 import FormSplitBill from './components/FormSplitBill';
+import Footer from './components/Footer';
+
 // import { initialFriends } from './friends';
 
 export default function App() {
@@ -63,26 +65,32 @@ export default function App() {
 	};
 
 	return (
-		<div className='app'>
-			<div className='sidebar'>
-				<FriendList
-					friends={friends}
-					onSelection={handleOnSelection}
-					selectedFriend={selectedFriend}
-					onDelete={handleDeleteFriend}
-				/>
-				{showAddFriend && <FormAddFriend onAddFriend={handleAddFriend} />}
-				<Button
-					text={!showAddFriend ? 'Add Friend' : 'Close'}
-					onClick={handleShowAddFriend}
-				/>
+		<div className='app-container'>
+			<Header />
+			<div className='app'>
+				<div className='sidebar'>
+					<FriendList
+						friends={friends}
+						onSelection={handleOnSelection}
+						selectedFriend={selectedFriend}
+						onDelete={handleDeleteFriend}
+					/>
+					{showAddFriend && <FormAddFriend onAddFriend={handleAddFriend} />}
+					<Button
+						text={!showAddFriend ? 'Add Friend' : 'Close'}
+						onClick={handleShowAddFriend}
+					/>
+				</div>
+				{selectedFriend ? (
+					<FormSplitBill
+						selectedFriend={selectedFriend}
+						onSplitBill={handleSplitBill}
+					/>
+				) : (
+					<HowItWorks />
+				)}
 			</div>
-			{selectedFriend && (
-				<FormSplitBill
-					selectedFriend={selectedFriend}
-					onSplitBill={handleSplitBill}
-				/>
-			)}
+			<Footer />
 		</div>
 	);
 }
