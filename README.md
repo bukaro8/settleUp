@@ -1,7 +1,7 @@
 # SettleUp - Bill Splitting App
 ![App Screenshot](documentation/app-screenshot.png)
-## 💻  Run Locally
-/Users/vic/project2/settle-up/public/documentation/app-screenshot.png
+## 💻  Deployment (Run Locally)
+
 ```bash
 # Clone repository
 git clone https://github.com/yourusername/settleup.git
@@ -12,6 +12,7 @@ npm install
 # Start development server
 npm start
 ```
+
 
 ## 🛠 Tech Stack
 
@@ -42,10 +43,6 @@ npm start
 - Modify existing entries without data loss
 - Filter friends by balance status (owes/owed)
 
-**Acceptance Criteria:**
-- Quick-add shortcut in navigation
-- Undo/redo functionality for edits
-- Balance filter chips above friend list
 
 
 ## ✨ Features
@@ -85,13 +82,14 @@ npm start
 
 ### Color Palette
 
-| Role      | Hex       | Usage Example         |
-| --------- | --------- | --------------------- |
-| Primary   | `#ff922b` | Main buttons, headers |
-| Secondary | `#ffe8cc` | Form backgrounds      |
-| Success   | `#66a80f` | Positive balances     |
-| Error     | `#e03131` | Negative balances     |
-| Text      | `#495057` | Body copy             |
+| Role      | Hex       | Visual                                                                                       | Usage Examples                                   |
+| --------- | --------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| Primary   | `#ff922b` | <div style="width:20px; height:20px; background-color:#ff922b; border:1px solid #000"></div> | Main buttons, action items, important highlights |
+| Secondary | `#ffe8cc` | <div style="width:20px; height:20px; background-color:#ffe8cc; border:1px solid #000"></div> | Backgrounds, cards, secondary containers         |
+| Positive  | `#66a80f` | <div style="width:20px; height:20px; background-color:#66a80f; border:1px solid #000"></div> | Positive balances, success states                |
+| Negative  | `#e03131` | <div style="width:20px; height:20px; background-color:#e03131; border:1px solid #000"></div> | Negative balances, error states                  |
+| Text      | `#495057` | <div style="width:20px; height:20px; background-color:#495057; border:1px solid #000"></div> | Body text, default typography                    |
+| Lightest  | `#fff4e6` | <div style="width:20px; height:20px; background-color:#fff4e6; border:1px solid #000"></div> | Page backgrounds, subtle highlights              |
 
 ### Typography
 
