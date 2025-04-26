@@ -117,3 +117,49 @@ test('calculates friend balance correctly', () => {
   expect(calculateBalances(bill, yourExpense, payer)).toEqual(expected);
 });
 ```
+### Manual Testing
+
+Below is the manual testing performed for SettleUp to ensure all features work as expected.
+
+| Feature               | Action                                                | Expected Result                              | Tested | Passed | Comments                                 |
+| --------------------- | ----------------------------------------------------- | -------------------------------------------- | ------ | ------ | ---------------------------------------- |
+| **Friend Management** |                                                       |                                              |        |        |                                          |
+| Add Friend            | Click "+ Add Friend", enter name and background color | New friend appears in list with £0 balance   | Yes    | Yes    | -                                        |
+| Delete Friend         | Click "❌" on friend card                              | Friend is removed from list                  | Yes    | Yes    | Confirmation dialog would improve safety |
+| **Bill Splitting**    |                                                       |                                              |        |        |                                          |
+| Enter Bill Amount     | Type "100" in bill field                              | Field accepts numeric input                  | Yes    | Yes    | Non-numeric input blocked                |
+| Set Your Expense      | Type "40" in your expense field                       | Friend's expense auto-calculates as £60      | Yes    | Yes    | Disables if > bill amount                |
+| Select Payer          | Choose "You" or friend from dropdown                  | Correct balance adjustment shown             | Yes    | Yes    | -                                        |
+| Submit Split          | Click "Split Bill"                                    | Balances update (green if owed, red if owes) | Yes    | Yes    | Persists after refresh                   |
+| **Data Persistence**  |                                                       |                                              |        |        |                                          |
+| Refresh Page          | Reload browser                                        | All friends and balances remain              | Yes    | Yes    | Uses IndexedDB                           |
+| **Responsiveness**    |                                                       |                                              |        |        |                                          |
+| Mobile View           | Resize to 375px width                                 | All components stack neatly                  | Yes    | Yes    | Form inputs remain usable                |
+| Tablet View           | Resize to 768px width                                 | Sidebar and split form appear side-by-side   | Yes    | Yes    | -                                        |
+
+## Edge Case Testing
+
+| Scenario              | Action                       | Result                          | Passed |
+| --------------------- | ---------------------------- | ------------------------------- | ------ |
+| Negative Balance      | Set friend's balance to -£20 | Shows "You owe John £20" in red | Yes    |
+| Zero Balance          | Settle up with £0 difference | Shows "You and John are even"   | Yes    |
+| Large Number Handling | Enter £999999 bill           | Calculates correctly            | Yes    |
+| Form Validation       | Submit empty split bill form | Shows error highlights          | Yes    |
+
+## Credits
+
+### Technologies
+- **React**: Frontend framework
+- **Dexie.js**: IndexedDB wrapper for data persistence
+- **CSS Modules**: Component-scoped styling
+- **Google Fonts**: "Pacifico" for logo typography
+
+### Design Resources
+- **Color Palette**: Selected from [Coolors](https://coolors.co/ff922b-ffe8cc-66a80f-e03131)
+- **Icons**: [React Icons](https://react-icons.github.io/react-icons/) library
+- **UI Inspiration**: Inspired by Splitwise app
+
+### Testing Tools
+- **ESLint**: Code quality checks
+- **React Testing Library**: Component tests
+- **Chrome DevTools**: Debugging and performance analysis

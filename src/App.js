@@ -1,4 +1,10 @@
 import { useState, useEffect } from 'react';
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+	Navigate,
+} from 'react-router-dom';
 import { db } from './db';
 import Button from './components/Button';
 import FormAddFriend from './components/FormAddFriend';
@@ -10,7 +16,7 @@ import HowItWorks from './components/HowItWorks';
 
 // import { initialFriends } from './friends';
 
-export default function App() {
+function App() {
 	const [friends, setFriends] = useState([]);
 	const [showAddFriend, setShowAddFriend] = useState(false);
 	const [selectedFriend, setSelectedFriend] = useState(null);
@@ -115,5 +121,16 @@ export default function App() {
 			</div>
 			<Footer />
 		</div>
+	);
+}
+
+export default function WrappedApp() {
+	return (
+		<Router>
+			<Routes>
+				<Route path='/' element={<App />} />
+				<Route path='*' element={<Navigate to='/' replace />} />
+			</Routes>
+		</Router>
 	);
 }
