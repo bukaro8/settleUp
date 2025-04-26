@@ -100,7 +100,31 @@ npm start
 | Buttons   | `Rubik`     | 1.4rem | 700    |
 | Numbers   | `Menlo`     | 1.6rem | 400    |
 
-## 📊 Testing
+## 📐 Wireframes
+
+### Desktop Layout
+![Desktop Wireframe](./documentation/wireframes/desktop-wireframe.png)
+
+### Mobile Screens
+| Screen 1                                                                 | Screen 2                                                                 | Screen 3                                                                 |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| ![Mobile Wireframe 1](./documentation/wireframes/mobile-wireframe-1.png) | ![Mobile Wireframe 2](./documentation/wireframes/mobile-wireframe-2.png) | ![Mobile Wireframe 3](./documentation/wireframes/mobile-wireframe-3.png) |
+
+
+
+## 🧪 Testing Results
+
+### Quality Assurance Verification
+
+| Test Case                 | Screenshot                                                        | Description                                                   |
+| ------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------- |
+| **Successful Deployment** | ![Deployment](./documentation/testing/testing-deployment.png)     | All builds pass with zero errors in production deployment     |
+| **Performance Metrics**   | ![Metrics](./documentation/testing/testing-metrics.png)           | Excellent Lighthouse scores (>90) for all critical web vitals |
+| **Error-Free Console**    | ![Console](./documentation/testing/testing-no_errors_console.png) | No warnings or errors in browser developer tools              |
+| **Code Quality**          | ![Linting](./documentation/testing/testing-no_problem-jslint.png) | 100% clean code with no JSLint/ESLint violations              |
+| **Speed Test**            | ![Performance](./documentation/testing/testing-performance.png)   | Sub-second load times across all device types                 |
+
+<sub>✅ All test results meet or exceed project quality standards</sub>
 
 ```javascript
 // Sample test for balance calculation
