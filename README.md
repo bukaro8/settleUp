@@ -123,6 +123,8 @@ npm start
 | **Error-Free Console**    | ![Console](./documentation/testing/testing-no_errors_console.png) | No warnings or errors in browser developer tools              |
 | **Code Quality**          | ![Linting](./documentation/testing/testing-no_problem-jslint.png) | 100% clean code with no JSLint/ESLint violations              |
 | **Speed Test**            | ![Performance](./documentation/testing/testing-performance.png)   | Sub-second load times across all device types                 |
+| **Delivery Test**         | ![Performance](./documentation/testing/testing-speed.png)         | Fast load                                                     |
+| **Rendering Speed Test**  | ![Performance](./documentation/testing/testing-rendering.png)     | Rendering load times                                          |
 
 <sub>✅ All test results meet or exceed project quality standards</sub>
 
