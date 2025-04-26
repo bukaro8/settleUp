@@ -14,6 +14,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import HowItWorks from './components/HowItWorks';
 
+// ? for testing !!
 // import { initialFriends } from './friends';
 
 function App() {
