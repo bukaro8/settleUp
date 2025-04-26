@@ -172,6 +172,20 @@ Below is the manual testing performed for SettleUp to ensure all features work a
 | Large Number Handling | Enter £999999 bill           | Calculates correctly            | Yes    |
 | Form Validation       | Submit empty split bill form | Shows error highlights          | Yes    |
 
+## 📱 Responsive Design
+
+SettleUp adapts seamlessly across all device sizes with consistent functionality.
+
+### Device Previews
+
+| Device Type | Screenshot                                                         | Key Features                                                                       |
+| ----------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| **Desktop** | ![Desktop View](./documentation/responsive/responsive-desktop.png) | - Two-column layout<br>- Hover effects on buttons<br>- Larger interactive elements |
+| **Tablet**  | ![Tablet View](./documentation/responsive/responsive-tablet.png)   | - Optimized sidebar width<br>- Touch-friendly controls<br>- Adaptive font sizes    |
+| **Mobile**  | ![Mobile View](./documentation/responsive/responsive-mobile.png)   | - Single-column flow<br>- Stacked form inputs<br>- Larger tap targets              |
+
+
+
 ## Credits
 
 ### Technologies
