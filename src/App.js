@@ -130,7 +130,7 @@ export default function WrappedApp() {
 		<Router>
 			<Routes>
 				<Route path='/' element={<App />} />
-				<Route path='*' element={<Navigate to='/' replace />} />
+				<Route path='/*' element={<Navigate to='/' replace />} />
 			</Routes>
 		</Router>
 	);
