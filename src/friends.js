@@ -1,3 +1,4 @@
+//?for testing
 export const initialFriends = [
 	{
 		id: 118836,

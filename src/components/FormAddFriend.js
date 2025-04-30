@@ -17,7 +17,7 @@ export default function FormAddFriend({ onSubmit, onAddFriend }) {
 			name,
 			background,
 			balance: 0,
-			//!Change id to be handle by Dexie
+			//!id to be handle by Dexie
 		};
 
 		onAddFriend(newFriend);
